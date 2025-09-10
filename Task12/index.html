@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task 12</title>
+</head>
+<body>
+  <label for="nameInput">Name:</label>
+  <input type="text" id="nameInput" placeholder="Name"><br><br>
+
+  <label for="ageInput">Age:</label>
+  <input type="number" id="ageInput" placeholder="Age"><br><br>
+
+  <button id="submitButton">Submit</button>
+
+  <script>
+    // دالة للتحقق من صحة المدخلات
+    function validateInput(name, age) {
+      if (!name || name.trim() === "") {
+        alert("الرجاء إدخال الاسم");
+        return false;
+      }
+      if (!age || isNaN(age) || age <= 0) {
+        alert("الرجاء إدخال عمر صالح");
+        return false;
+      }
+      return true;
+    }
+
+    // دالة لإنشاء Object يحتوي على الاسم، العمر، والتاريخ/الوقت
+    function createUserObject(name, age) {
+      return {
+        name: name.trim(),
+        age: age,
+        timestamp: new Date().toLocaleString()  // تأكد من توليد التاريخ الحالي
+      };
+    }
+
+    // دالة لمعالجة الضغط على الزر
+    function handleSubmitClick() {
+      const nameValue = document.getElementById("nameInput").value;
+      const ageValue = document.getElementById("ageInput").value;
+
+      if (!validateInput(nameValue, ageValue)) return;
+
+      const userObject = createUserObject(nameValue, ageValue);
+
+      // عرض نافذة alert بكل الحقول الثلاثة
+      alert(
+        `Your name is: ${userObject.name}\n` +
+        `Your age is: ${userObject.age}\n` +
+        `Timestamp: ${userObject.timestamp}`
+      );
+    }
+
+    // إضافة Event Listener منفصل للزر
+    const submitButton = document.getElementById("submitButton");
+    submitButton.addEventListener("click", handleSubmitClick);
+  </script>
+</body>
+</html>

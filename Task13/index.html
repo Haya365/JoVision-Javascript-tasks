@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task 13</title>
+</head>
+<body>
+  <label for="nameInput">Name:</label>
+  <input type="text" id="nameInput" placeholder="Name"><br><br>
+
+  <button id="submitButton">Submit</button>
+
+  <script>
+    // دالة للتحقق من صحة الاسم
+    function validateName(name) {
+      if (!name || name.trim() === "") {
+        alert("الرجاء إدخال الاسم");
+        return false;
+      }
+      return true;
+    }
+
+    // دالة لعمل طلب API
+    function fetchPredictedAge(name) {
+      const url = `https://api.agify.io?name=${encodeURIComponent(name.trim())}`;
+      return fetch(url)
+        .then(response => {
+          if (!response.ok) throw new Error("Network response was not ok");
+          return response.json();
+        });
+    }
+
+    // دالة لمعالجة الضغط على الزر
+    function handleSubmitClick() {
+      const nameValue = document.getElementById("nameInput").value;
+
+      if (!validateName(nameValue)) return;
+
+      fetchPredictedAge(nameValue)
+        .then(data => {
+          alert(`Your name is: ${data.name}\nYour age is: ${data.age}`);
+        })
+        .catch(error => {
+          console.error("Error fetching age:", error);
+          alert("حدث خطأ أثناء جلب العمر المتوقع: " + error.message);
+        });
+    }
+
+    // إضافة Event Listener منفصل للزر
+    const submitButton = document.getElementById("submitButton");
+    submitButton.addEventListener("click", handleSubmitClick);
+  </script>
+</body>
+</html>
