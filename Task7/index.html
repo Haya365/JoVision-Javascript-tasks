@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task 7</title>
+  <style>
+    #clock {
+      font-size: 2em;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div id="clock">00:00:00</div>
+
+  <script>
+    // دالة لتنسيق الرقم ليصبح بصيغة رقمين (مثلاً 4 تصبح 04)
+    function formatNumber(num) {
+      return num < 10 ? "0" + num : num;
+    }
+
+    // دالة لتحديث الوقت
+    function updateClock() {
+      try {
+        const now = new Date();
+        const hours = formatNumber(now.getHours());
+        const minutes = formatNumber(now.getMinutes());
+        const seconds = formatNumber(now.getSeconds());
+
+        const currentTime = `${hours}:${minutes}:${seconds}`;
+        document.getElementById("clock").textContent = currentTime;
+      } catch (error) {
+        console.error("Error updating clock:", error);
+      }
+    }
+
+    // تحديث الساعة كل ثانية
+    setInterval(updateClock, 1000);
+
+    // عرض الوقت مباشرة عند تحميل الصفحة
+    updateClock();
+  </script>
+</body>
+</html>
