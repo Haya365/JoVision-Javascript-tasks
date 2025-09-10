@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task 6</title>
+</head>
+<body>
+  <button onclick="buttonOne()">Button 1</button>
+  <button onclick="buttonTwo()">Button 2</button>
+  <button onclick="buttonThree()">Button 3</button>
+  <button onclick="buttonFour()">Button 4</button>
+  <button onclick="buttonFive()">Button 5</button>
+
+  <script>
+    // دالة لإنشاء مصفوفة من 0 إلى 100
+    function createArray() {
+      let arr = [];
+      for (let i = 0; i <= 100; i++) {
+        arr.push(i);
+      }
+      return arr;
+    }
+
+    // دالة لتبديل عناصر المصفوفة عشوائيًا
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function buttonOne() {
+      try {
+        let arr = createArray();
+        arr = arr.filter(num => num % 3 !== 0);
+        console.log("Button 1:", arr);
+      } catch (error) {
+        console.error("Error in Button 1:", error);
+      }
+    }
+
+    function buttonTwo() {
+      try {
+        let arr = createArray();
+        for (let i = 101; i <= 150; i++) {
+          arr.push(i);
+        }
+        console.log("Button 2:", arr);
+      } catch (error) {
+        console.error("Error in Button 2:", error);
+      }
+    }
+
+    function buttonThree() {
+      try {
+        let arr = createArray();
+        arr = arr.map(num => num + 3);
+        console.log("Button 3:", arr);
+      } catch (error) {
+        console.error("Error in Button 3:", error);
+      }
+    }
+
+    function buttonFour() {
+      try {
+        let arr = createArray();
+        let subset = arr.slice(20, 41); // index 20 إلى 40
+        console.log("Button 4:", subset);
+      } catch (error) {
+        console.error("Error in Button 4:", error);
+      }
+    }
+
+    function buttonFive() {
+      try {
+        let arr = createArray();
+        shuffleArray(arr);
+        console.log("Button 5 - shuffled:", arr);
+        arr.sort((a, b) => b - a);
+        console.log("Button 5 - sorted descending:", arr);
+      } catch (error) {
+        console.error("Error in Button 5:", error);
+      }
+    }
+  </script>
+</body>
+</html>
